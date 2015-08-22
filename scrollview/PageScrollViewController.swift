@@ -29,14 +29,18 @@ class PageScrollViewController: UIViewController {
         pageControl.currentPage = 0
         pageControl.numberOfPages = pageCount
         
-        // 不关心区间内的值,用_替代变量名来忽略对值的访问,...和..<不同.
+        // Set up the array to hold the views for each page
         for _ in 0..<pageCount {
             pageViews.append(nil)
         }
         
         let pagesScrollViewSize = scrollView.frame.size
-        scrollView.contentSize = CGSize(width: pagesScrollViewSize.width * CGFloat(pageImages.count), height: pagesScrollViewSize.height)
+        scrollView.contentSize = CGSize(width: pagesScrollViewSize.width * CGFloat(pageImages.count + 1), height: pagesScrollViewSize.height)
         
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         loadVisiblePages()
     }
     
